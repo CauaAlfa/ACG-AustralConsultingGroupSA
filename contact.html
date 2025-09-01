@@ -12,6 +12,7 @@
       width: 100%;
     }
   </style>
+  <link rel="icon" href="assets/favicon.ico" />
 </head>
 
 <body>
@@ -44,7 +45,7 @@
 
     <section class="section">
       <div class="container grid-2">
-        <form id="contactForm" class="form card">
+        <form id="contactForm" class="form card" method="POST" action="contact.php">
           <div class="form-row">
             <label for="name">Full Name*</label>
             <input id="name" name="name" type="text" placeholder="Your name" required />

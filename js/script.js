@@ -13,30 +13,37 @@ if (toggle && nav) {
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// Contact form (basic client-side validation + demo submit)
+// Contact form (AJAX -> PHP mail)
 const form = document.getElementById('contactForm');
-const statusEl = document.getElementById('formStatus');
-
 if (form) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    statusEl.textContent = '';
+    const statusEl = document.getElementById('formStatus');
+    if (statusEl) statusEl.textContent = 'Sending...';
 
-    const data = Object.fromEntries(new FormData(form).entries());
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
 
-    // Simple checks
     if (!data.name || !data.email || !data.subject || !data.message) {
-      statusEl.textContent = 'Please fill all required fields.';
+      if (statusEl) statusEl.textContent = 'Please fill all required fields.';
       return;
     }
 
-    // DEMO behavior: opens mail client. Replace with real endpoint later.
-    const body =
-      `Name: ${data.name}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone || '-'}%0D%0A` +
-      `Subject: ${data.subject}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(data.message)}`;
-
-    window.location.href = `mailto:muagacaua@gmail.com?subject=${encodeURIComponent('[ACG Website] ' + data.subject)}&body=${body}`;
-
-    statusEl.textContent = 'Opening your email app...';
+    try {
+      const res = await fetch('contact.php', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new URLSearchParams(data)
+      });
+      const result = await res.json();
+      if (result.ok) {
+        if (statusEl) statusEl.textContent = 'Message sent successfully. Thank you!';
+        form.reset();
+      } else {
+        if (statusEl) statusEl.textContent = result.error || 'Could not send message. Please try again later.';
+      }
+    } catch (err) {
+      if (statusEl) statusEl.textContent = 'Network error. Please try again.';
+    }
   });
 }
