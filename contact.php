@@ -18,7 +18,7 @@ if (!$name || !$email || !$subject || !$message) {
   exit;
 }
 
-$to = 'admin@acg.co.mz'; // Change to your preferred recipient
+$to = 'muagacaua@gmail.com'; // Change to your preferred recipient
 $subjectLine = "[ACG Website] " . $subject;
 
 $lines = [
