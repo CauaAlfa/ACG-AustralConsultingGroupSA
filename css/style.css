@@ -37,6 +37,22 @@ body {
   margin: 0 auto;
   padding: 0 20px;
 }
+
+.container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 100%;
+}
+
+header .brand img {
+  width: 40px;   /* largura */
+  height: auto;  /* mantém proporção */
+  margin-right: 8px; /* espaço entre a imagem e o texto */
+  vertical-align: middle;
+}
+
+
 .muted {
   color: var(--muted);
 }
@@ -466,6 +482,15 @@ textarea:focus {
   align-items: center;
   gap: 10px;
 }
+
+.brand-inline img {
+  width: 40px;   /* largura fixa */
+  height: auto;  /* mantém proporção */
+  margin-right: 8px; /* espaço entre logo e texto */
+  vertical-align: middle; /* alinha ao texto */
+}
+
+
 .foot-list {
   list-style: none;
   margin: 0;
@@ -647,6 +672,14 @@ a:hover {
   max-height: 80px;
   object-fit: contain;
 }
+
+.about-hero {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 100%;
+}
+
 
 @media (max-width: 1024px) {
   .logo-grid {
